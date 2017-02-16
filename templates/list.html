@@ -1,12 +1,16 @@
 <!doctype html>
 
 <head>
-    <title>User Story Manager</title>
+    <title>Super Sprinter 3000</title>
 </head>
 
 <body>
     <h1>User Story Manager</h1>
-    <p><button type="button">Add new User Story</button></p>
+    <p>
+        <form>
+            <input type="button" value="Add new User Story" onclick="location.href = 'new_story.html';">
+        </form>
+    </p>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -18,17 +22,20 @@
             <th>Status</th>
 
         </tr>
-        <tr>
-            <td>1.</td>
-            <td>Some Title</td>
-            <td>Some Story</td>
-            <td>Some Criteria</td>
-            <td>1000</td>
-            <td>30.05</td>
-            <td>In Progress</td>
-            <td><button type="button"><img src="pen.png" style="width:15px;height:15px;"></button>
-                <button type="button"><img src="bin.jpg" style="width:15px;height:15px;"></button>
-            </td>
-        </tr>
+        <ul class=stories>
+            {% for story in stories %}
+            <tr>
+                <td>{{ story.id }}</td>
+                <td>{{ story.title }}</td>
+                <td>{{ story.story }}</td>
+                <td>{{ story.criteria }}</td>
+                <td>{{ story.value }}</td>
+                <td>{{ story.estimation }}</td>
+                <td>{{ story.status }}</td>
+                <td><button type="submit" name="pen"><img src="templates/pen.png" style="width:20px;height:20px;" alt="">
+                    <button type="submit" name="bin"><img src="templates/bin.jpg " style="width:20px;height:20px;" alt="">
+                </td>
+            </tr>
+            {% endfor %}
     </table>
 </body>
