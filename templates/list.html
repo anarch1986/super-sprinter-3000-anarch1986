@@ -46,7 +46,16 @@
                             </button>
                     </form>
                 </td>
-            </tr>
-            {% endfor %}
+                {% else %}
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <p><strong>There are no Stories so far</strong></p> {% endfor %}
     </table>
 </body>

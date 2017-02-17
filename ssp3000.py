@@ -31,11 +31,20 @@ def show_user_stories():
     return render_template('list.html', stories=user_stories)
 
 
-@app.route('/delete', methods=['POST'])
-def delete_user_story():
-    story_id = request.form["id_for_delete"]
-    selected_story = UserStory.get(UserStory.id == story_id)
-    selected_story.delete_instance()
+@app.route('/story')
+def empty_user_story():
+    return render_template('form.html', story=None)
+
+
+@app.route('/new_story', methods=['POST'])
+def add_user_story():
+    new_user_story = UserStory.create(title=request.form["story title"],
+                                      story=request.form["user story"], criteria=request.form[
+                                          "acceptance criteria"],
+                                      value=request.form[
+                                          "business value"], estimation=request.form["estimation"],
+                                      status=request.form["status"])
+    new_user_story.save()
     return redirect(url_for('show_user_stories'))
 
 
@@ -43,7 +52,7 @@ def delete_user_story():
 def get_user_story(story_id):
     story_id = request.form["id_for_update"]
     selected_story = UserStory.get(UserStory.id == story_id)
-    return render_template('update_story.html', story=selected_story)
+    return render_template('form.html', story=selected_story)
 
 
 @app.route('/update', methods=['POST'])
@@ -58,22 +67,12 @@ def update_user_story():
     return redirect(url_for('show_user_stories'))
 
 
-@app.route('/story')
-def empty_user_story():
-    return render_template('new_story.html')
-
-
-@app.route('/story', methods=['POST'])
-def add_user_story():
-    new_user_story = UserStory.create(title=request.form["story title"],
-                                      story=request.form["user story"], criteria=request.form[
-                                          "acceptance criteria"],
-                                      value=request.form[
-                                          "business value"], estimation=request.form["estimation"],
-                                      status=request.form["status"])
-    new_user_story.save()
+@app.route('/delete', methods=['POST'])
+def delete_user_story():
+    story_id = request.form["id_for_delete"]
+    selected_story = UserStory.get(UserStory.id == story_id)
+    selected_story.delete_instance()
     return redirect(url_for('show_user_stories'))
-
 
 if __name__ == "__main__":
     init_db()

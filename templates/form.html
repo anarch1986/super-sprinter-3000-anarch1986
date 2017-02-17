@@ -1,0 +1,57 @@
+<!doctype html>
+
+<head>
+    <title>Super Sprinter 3000 -{% if story is not none %} Edit Story{% else %} Add new Story{%endif %}</title>
+</head>
+
+<body>
+    <h1>User Story Manager -{% if story is not none %} Edit Story{% else %} Add new Story{%endif %}</h1>
+    <form action={% if story is not none %} "{{ url_for('update_user_story') }}"{% else %} "{{ url_for('add_user_story') }}" {%endif %} method=post>
+        {% if story is not none %}<input type="hidden" id="id" name="id" value={{ story.id }} readonly>{%endif %}
+        <p>
+            <label for="story title">Story Title</label>
+        </p>
+        <p>
+            <textarea id="story title" name="story title" rows=1 cols=80 maxlength="70" required="required">{% if story is not none %}{{ story.title }}{% else %}{%endif %}</textarea>
+        </p>
+        <p>
+            <label for="user story">User Story</label>
+        </p>
+        <p>
+            <textarea id="user story" name="user story" rows=8 cols=80 maxlength="560" required="required">{% if story is not none %}{{ story.story }}{% else %}{%endif %}</textarea>
+        </p>
+        <p>
+            <label for="acceptance criteria">Acceptance Criteria</label>
+        </p>
+        <p>
+            <textarea id="acceptance criteria" name="acceptance criteria" rows=8 cols=80 maxlength="560" required="required">{% if story is not none %}{{ story.criteria }}{% else %}{%endif %}</textarea>
+        </p>
+        <p>
+            <label for="business value">Business Value</label>
+        </p>
+        <p>
+            <input type="number" id="business value" name="business value" min=100 max=1500 value={% if story is not none %}{{ story.value }}{% else %}100{%endif %} step=100>
+        </p>
+        <p>
+            <label for="estimation">Estimation</label>
+        </p>
+        <p>
+            <input type="number" id="estimation" name="estimation" min=0.5 max=40 value={% if story is not none %}{{ story.estimation }}{% else %}0.5{%endif %} step=0.5>
+        </p>
+        <p>
+            <label for="status">Status</label>
+        </p>
+        <p>
+            <select id="status" name="status">
+                <option value="Planning"{% if story.status=="Planning" %}selected="selected"{% endif %}>Planning</option>
+                <option value="To Do"{% if story.status=="To Do" %}selected="selected"{% endif %}>To Do</option>
+                <option value="In Progress"{% if story.status=="In Progress" %}selected="selected"{% endif %}>In Progress</option>
+                <option value="Review"{% if story.status=="Review" %}selected="selected"{% endif %}>Review</option>
+                <option value="Done"{% if story.status=="Done" %}selected="selected"{% endif %}>Done</option>
+            </select>
+        </p>
+        <p>
+            <input type=submit {% if story is not none %}id=Update value=Update{% else %}id=Create value=Create{% endif %}>
+        </p>
+    </form>
+</body>

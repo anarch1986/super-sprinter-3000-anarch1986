@@ -4,7 +4,7 @@ from peewee import *
 class CreateDatabase:
 
     def create_db_object():
-        identify = open("database_data.txt", "r")
+        identify = open("connection.txt", "r")
         login = identify.readlines()
         identify.close()
         db = PostgresqlDatabase(login[0], user=login[0])
