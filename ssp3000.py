@@ -46,7 +46,7 @@ def get_user_story(story_id):
     return render_template('update_story.html', story=selected_story)
 
 
-@app.route('/proceed_update', methods=['POST'])
+@app.route('/update', methods=['POST'])
 def update_user_story():
     story_for_update = UserStory.update(title=request.form["story title"],
                                         story=request.form["user story"], criteria=request.form[
