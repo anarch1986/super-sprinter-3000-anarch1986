@@ -1,4 +1,4 @@
-{% extends "story_template.html" %} {% block title %}Update User Story{% endblock %} {% block form %}
+{% extends "story_template.html" %} {% block title %}Edit Story{% endblock %} {% block form %}
 <h1>Update Story</h1>
 <form action="{{ url_for('update_user_story') }}" method=post>
     <input type="hidden" id="id" name="id" value={{ story.id }} readonly>
