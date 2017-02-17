@@ -8,7 +8,7 @@
     <h1>User Story Manager</h1>
     <p>
         <form>
-            <input type="button" value="Add new User Story" onclick="location.href = 'new_story.html';">
+            <input type="button" value="Add new User Story" onclick="location.href = 'story.html';">
         </form>
     </p>
     <table border="1">
@@ -32,8 +32,19 @@
                 <td>{{ story.value }}</td>
                 <td>{{ story.estimation }}</td>
                 <td>{{ story.status }}</td>
-                <td><button type="submit" name="pen"><img src="templates/pen.png" style="width:20px;height:20px;" alt="">
-                    <button type="submit" name="bin"><img src="templates/bin.jpg " style="width:20px;height:20px;" alt="">
+                <td>
+                    <form action="{{ url_for('get_user_story') }}" method=post>
+                        <input type="hidden" id="id_for_update" name="id_for_update" value={{ story.id }} readonly>
+                        <button type="submit" id="pen" name="pen">
+                            <img src="templates/pen.png" style="width:20px;height:20px;" alt="">
+                            </button>
+                    </form>
+                    <form action="{{ url_for('delete_user_story') }}" method=post>
+                        <input type="hidden" id="id_for_delete" name="id_for_delete" value={{ story.id }} readonly>
+                        <button type="submit" id="bin" name="bin">
+                            <img src="templates/bin.jpg " style="width:20px;height:20px;" alt="">
+                            </button>
+                    </form>
                 </td>
             </tr>
             {% endfor %}

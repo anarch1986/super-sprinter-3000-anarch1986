@@ -1,29 +1,32 @@
 <!doctype html>
 
 <head>
-    <title>Super Sprinter 3000 - Add new Story</title>
+    {% block head %}
+    <title>Super Sprinter 3000 - {% block title %}Story Form{% endblock %}</title>
+    {% endblock %}
 </head>
 
 <body>
-    <h1>Add new Story</h1>
-    <form action="{{ url_for('add_user_story') }}" method=post>
+    {% block form %}
+    <h1>Example Form</h1>
+    <form method=post>
         <p>
-            <label for="story_title">Story Title</label>
+            <label for="story title">Story Title</label>
         </p>
         <p>
-            <input type="text" id="story title" name="story title" size=70 required="required">
+            <textarea id="story title" name="story title" rows=1 cols=80 maxlength="70" required="required"></textarea>
         </p>
         <p>
-            <label for="user_story">User Story</label>
+            <label for="user story">User Story</label>
         </p>
         <p>
-            <textarea id="user story" name="user story" rows=8 cols=70 required="required"></textarea>
+            <textarea id="user story" name="user story" rows=8 cols=80 maxlength="560" required="required">{</textarea>
         </p>
         <p>
             <label for="acceptance criteria">Acceptance Criteria</label>
         </p>
         <p>
-            <textarea id="acceptance criteria" name="acceptance criteria" rows=8 cols=70 required="required"></textarea>
+            <textarea id="acceptance criteria" name="acceptance criteria" rows=8 cols=70 maxlength="560" required="required"></textarea>
         </p>
         <p>
             <label for="business value">Business Value</label>
@@ -53,3 +56,5 @@
             <input type=submit id=Save value=Save>
         </p>
     </form>
+    {% endblock %}
+</body>

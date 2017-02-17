@@ -1,0 +1,56 @@
+{% extends "story_template.html" %} {% block title %}Update User Story{% endblock %} {% block form %}
+    <h1>Update Story</h1>
+    <form action="{{ url_for('update_user_story') }}" method=post>
+        <input type="hidden" id="id" name="id" value={{ story.id }} readonly>
+        <p>
+            <label for="story title">Story Title</label>
+        </p>
+        <p>
+            <textarea id="story title" name="story title" rows=1 cols=80 maxlength="70"
+                      required="required">{{ story.title }}</textarea>
+        </p>
+        <p>
+            <label for="user story">User Story</label>
+        </p>
+        <p>
+            <textarea id="user story" name="user story" rows=8 cols=80 maxlength="560"
+                      required="required">{{ story.story }}</textarea>
+        </p>
+        <p>
+            <label for="acceptance criteria">Acceptance Criteria</label>
+        </p>
+        <p>
+            <textarea id="acceptance criteria" name="acceptance criteria" rows=8 cols=70 maxlength="560"
+                      required="required">{{ story.criteria }}</textarea>
+        </p>
+        <p>
+            <label for="business value">Business Value</label>
+        </p>
+        <p>
+            <input type="number" id="business value" name="business value" min=100 max=1500
+                   value={{ story.value }} step=100>
+        </p>
+        <p>
+            <label for="estimation">Estimation</label>
+        </p>
+        <p>
+            <input type="number" id="estimation" name="estimation" min=0.5 max=40 value={{ story.estimation }} step=0.5>
+        </p>
+        <p>
+            <label for="status">Status</label>
+        </p>
+        <p>
+            <select id="status" name="status">
+                <option value="Planning">Planning</option>
+                <option value="To Do">To Do</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Review">Review</option>
+                <option value="Done">Done</option>
+            </select>
+        </p>
+        <p>
+            <input type=submit id=Update value=Update>
+        </p>
+    </form>
+{% endblock %}
+</body>

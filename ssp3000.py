@@ -39,18 +39,50 @@ def show_user_stories():
     return render_template('list.html', stories=user_stories)
 
 
-@app.route('/new_story.html')
+@app.route('/', methods=['POST'])
+@app.route('/list.html', methods=['POST'])
+def delete_user_story():
+    story_id = request.form["id_for_delete"]
+    selected_story = UserStory.get(UserStory.id == story_id)
+    selected_story.delete_instance()
+    return redirect(url_for('show_user_stories'))
+
+
+@app.route('/update.html', methods=['POST'])
+def get_user_story():
+    story_id = request.form["id_for_update"]
+    selected_story = UserStory.get(UserStory.id == story_id)
+    return render_template('update_story.html', story=selected_story)
+
+
+@app.route('/proceed_update.html', methods=['POST'])
+def update_user_story():
+    story_for_update = UserStory.update(title=request.form["story title"],
+                                        story=request.form["user story"], criteria=request.form[
+                                            "acceptance criteria"],
+                                        value=request.form[
+                                            "business value"], estimation=request.form["estimation"],
+                                        status=request.form["status"]).where(UserStory.id == request.form["id"])
+    story_for_update.execute()
+    return redirect(url_for('show_user_stories'))
+
+
+@app.route('/story.html')
 def empty_user_story():
-    return render_template('form.html')
+    return render_template('new_story.html')
 
 
-@app.route('/story', methods=['POST'])
+@app.route('/story.html', methods=['POST'])
 def add_user_story():
     new_user_story = UserStory.create(title=request.form["story title"],
-                                      story=request.form["user story"], criteria=request.form["acceptance criteria"], value=request.form["business value"], estimation=request.form["estimation"], status=request.form["status"])
+                                      story=request.form["user story"], criteria=request.form[
+                                          "acceptance criteria"],
+                                      value=request.form[
+                                          "business value"], estimation=request.form["estimation"],
+                                      status=request.form["status"])
     new_user_story.save()
-    flash('New User Story successfully added')
     return redirect(url_for('show_user_stories'))
+
 
 if __name__ == "__main__":
     init_db()
