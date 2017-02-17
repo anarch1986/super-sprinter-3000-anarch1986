@@ -33,14 +33,13 @@ def close_db(error):
 
 
 @app.route('/')
-@app.route('/list.html')
+@app.route('/list')
 def show_user_stories():
     user_stories = UserStory.select().order_by(UserStory.id.asc())
     return render_template('list.html', stories=user_stories)
 
 
-@app.route('/', methods=['POST'])
-@app.route('/list.html', methods=['POST'])
+@app.route('/delete', methods=['POST'])
 def delete_user_story():
     story_id = request.form["id_for_delete"]
     selected_story = UserStory.get(UserStory.id == story_id)
@@ -48,14 +47,14 @@ def delete_user_story():
     return redirect(url_for('show_user_stories'))
 
 
-@app.route('/update.html', methods=['POST'])
-def get_user_story():
+@app.route('/story/<story_id>', methods=['POST'])
+def get_user_story(story_id):
     story_id = request.form["id_for_update"]
     selected_story = UserStory.get(UserStory.id == story_id)
     return render_template('update_story.html', story=selected_story)
 
 
-@app.route('/proceed_update.html', methods=['POST'])
+@app.route('/proceed_update', methods=['POST'])
 def update_user_story():
     story_for_update = UserStory.update(title=request.form["story title"],
                                         story=request.form["user story"], criteria=request.form[
@@ -67,12 +66,12 @@ def update_user_story():
     return redirect(url_for('show_user_stories'))
 
 
-@app.route('/story.html')
+@app.route('/story')
 def empty_user_story():
     return render_template('new_story.html')
 
 
-@app.route('/story.html', methods=['POST'])
+@app.route('/story', methods=['POST'])
 def add_user_story():
     new_user_story = UserStory.create(title=request.form["story title"],
                                       story=request.form["user story"], criteria=request.form[

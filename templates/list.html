@@ -8,7 +8,7 @@
     <h1>User Story Manager</h1>
     <p>
         <form>
-            <input type="button" value="Add new User Story" onclick="location.href = 'story.html';">
+            <input type="button" value="Add new User Story" onclick="location.href = 'story';">
         </form>
     </p>
     <table border="1">
@@ -33,7 +33,7 @@
                 <td>{{ story.estimation }}</td>
                 <td>{{ story.status }}</td>
                 <td>
-                    <form action="{{ url_for('get_user_story') }}" method=post>
+                    <form action="/story/{{ story.id }}" method=post>
                         <input type="hidden" id="id_for_update" name="id_for_update" value={{ story.id }} readonly>
                         <button type="submit" id="pen" name="pen">
                             <img src="templates/pen.png" style="width:20px;height:20px;" alt="">
