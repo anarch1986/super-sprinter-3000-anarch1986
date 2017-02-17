@@ -15,7 +15,7 @@ def init_db():
         db.create_tables([UserStory], safe=True)
         print("Database connection established.")
     except:
-        print("Can't connect to database.\nPlease check your database_data.txt file.")
+        print("Can't connect to database.\nPlease check your connection.txt file.")
 
 
 @app.teardown_appcontext
