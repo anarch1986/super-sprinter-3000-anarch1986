@@ -2,13 +2,10 @@ from models import *
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash
 
-DATABASE = "tomi.db"
 DEBUG = True
-SECRET_KEY = "Irjabeapint"
 
 app = Flask(__name__, static_url_path="/templates", static_folder="templates")
 app.config.from_object(__name__)
-db = CreateDatabase.create_db_object()
 
 
 def init_db():
@@ -19,11 +16,6 @@ def init_db():
         print("Database connection established.")
     except:
         print("Can't connect to database.\nPlease check your database_data.txt file.")
-
-
-@app.cli.command('initdb')
-def initdb_command():
-    init_db()
 
 
 @app.teardown_appcontext
