@@ -43,11 +43,11 @@
         </p>
         <p>
             <select id="status" name="status">
-                <option value="Planning"{% if story.status=="Planning" %}selected="selected"{% endif %}>Planning</option>
-                <option value="To Do"{% if story.status=="To Do" %}selected="selected"{% endif %}>To Do</option>
-                <option value="In Progress"{% if story.status=="In Progress" %}selected="selected"{% endif %}>In Progress</option>
-                <option value="Review"{% if story.status=="Review" %}selected="selected"{% endif %}>Review</option>
-                <option value="Done"{% if story.status=="Done" %}selected="selected"{% endif %}>Done</option>
+                <option value="Planning" {% if story.status=="Planning" %}selected="selected"{% endif %}>Planning</option>
+                <option value="To Do" {% if story.status=="To Do" %}selected="selected"{% endif %}>To Do</option>
+                <option value="In Progress" {% if story.status=="In Progress" %}selected="selected"{% endif %}>In Progress</option>
+                <option value="Review" {% if story.status=="Review" %}selected="selected"{% endif %}>Review</option>
+                <option value="Done" {% if story.status=="Done" %}selected="selected"{% endif %}>Done</option>
             </select>
         </p>
         <p>

@@ -1,6 +1,6 @@
 from models import *
-from flask import Flask, request, session, g, redirect, url_for, abort, \
-    render_template, flash
+from flask import Flask, request, g, redirect, url_for, \
+    render_template
 
 DEBUG = True
 
@@ -76,4 +76,4 @@ def delete_user_story():
 
 if __name__ == "__main__":
     init_db()
-    app.run()
+    app.run(host='0.0.0.0')
